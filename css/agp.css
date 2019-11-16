@@ -1,0 +1,20 @@
+.nav-wrapper {
+    text-align: center;
+    text-shadow: 3px 2px #0d47a1;
+
+
+} 
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  }
+
+  main {
+    flex: 1 0 auto;
+  }
+
+  p{
+      text-align: justify;
+      size
+  }
