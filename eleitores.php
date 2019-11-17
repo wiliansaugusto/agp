@@ -1,21 +1,21 @@
 <?php
 
-require_once('classes/candidato.class.php');
+include_once('classes/eleitor.class.php');
 
-
- if(isset($_POST['cadastrarCandidato'])){
-    $obj = new candidato();
+//var_dump($_POST);
+ if(isset($_POST['cadastrarEleitor'])){
+     $obj = new eleitor();
     foreach ($_POST as $key => $value) {
       $obj->$key=$value;
 
     }
 
-$result =    $obj->salvar($_POST);
-
+$result = $obj->salvar($_POST);
+/*
 if(! $result){
   header("location: index.php"); 
 
-}
+}*/
 
  }
 
@@ -53,9 +53,9 @@ if(! $result){
 <?php include_once('navegacao.php')?>
 
 <div class="container m10">
-<h3 class="center-align">Cadastrar candidato</h3>
+<h3 class="center-align">Cadastro Eleitores</h3>
 
-<form action="candidatos.php" method="post">
+<form action="eleitores.php" method="post">
     <input type="hidden" name="isAtivo" value="1">
 <div class="row">
     <form class="col s12 ">
@@ -162,74 +162,62 @@ if(! $result){
           <label for="instUrlId">Instagram</label>
         </div>
       </div>
+    
+      </div>
+
+
       <div class="row">
     <form class="col s12">
       <div class="row">
         <div class="input-field col s12 l6">
-          <input name="nmUsuario" id="nmUsuarioId" type="text" class="validate">
-          <label for="nmUsuarioId">Nome Usuario</label>
+          <input name="nmIndicacao" id="nmIndicacaoId" type="text" class="validate">
+          <label for="nmIndicacaoId">Quem Indicou?</label>
         </div>
         <div class="input-field col s12 l6">
-          <input name="senha" id="senhaId" type="password" class="validate">
-          <label for="senhaId">Senha</label>
-
-
+        <textarea name="observacao" id="observacaoId" class="materialize-textarea"></textarea>
+          <label for="observacaoId">Observações</label>
+        </div>
+      </div>
+      <div class="row">
+    <form class="col s12">
+      <div class="row">
+        <div class="input-field col s12 l6">
+          <input name="posicionamento" id="posicionamentoId" type="text" class="validate">
+          <label for="posicionamentoId">Posionamento Politico</label>
+        </div>
+        <div class="input-field col s12 l6">
+          <input name="bandeiras" id="bandeirasId" type="text" class="validate">
+          <label for="bandeirasId">Bandeiras que defende</label>
+        </div>
+      </div>
+      <div class="row">
+    <form class="col s12">
+      <div class="row">
+        <div class="input-field col s12 l6">
+          <input name="partidosNegativos" id="partidosNegativosId" type="text" class="validate">
+          <label for="partidosNegativosId">Partidos que jamais votaria</label>
+        </div>
+        <div class="input-field col s12 l6">
+          <input name="partidosPositivos" id="partidosPositivosId" type="text" class="validate">
+          <label for="partidosPositivosId">Partidos que costuma votar</label>
         </div>
       </div>
 
-<h5 class="center-align">Dados da candidatura</h5>
       <div class="row">
     <form class="col s12">
       <div class="row">
-        <div class="input-field col s12 l6">
-          <input name="nmCandidato" id="nmCandidatoId" type="text" class="validate">
-          <label for="nmCandidatoId">Nome Fantasia</label>
-        </div>
-        <div class="input-field col s12 l6">
-          <input name="CNPJCampanha" id="CNPJCampanhaId" type="text" class="validate">
-          <label for="CNPJCampanhaId">CNPJ da Campanha</label>
-        </div>
       
-      <div class="row">
-    <form class="col s12">
-      <div class="row">
         <div class="input-field col s12 l6">
-          <input name="numCandidato" id="numCandidatoId" type="text" class="validate">
-          <label for="numCandidatoId">Numero do Candidato</label>
+        <textarea name="rejeicaoCandidato" id="rejeicaoCandidatooId" class="materialize-textarea"></textarea>
+          <label for="rejeicaoCandidatoId">Candidatos que jamais votaria</label>
         </div>
+       
         <div class="input-field col s12 l6">
-          <input name="siglaPartido" id="siglaPartidoId" type="text" class="validate">
-          <label for="siglaPartidoId">Sigla Partidaria</label>
+          <input name="aprovacaoCandidato" id="aprovacaoCandidatoId" type="text" class="validate">
+          <label for="aprovacaoCandidatoId">Candidatos que votaria</label>
         </div>
-      </div>
-      <div class="row">
-    <form class="col s12">
-      <div class="row">
-        <div class="input-field col s12 l6">
-          <input name="nmColigacaoPorpocional" id="nmColigacaoPorpocionalId" type="text" class="validate">
-          <label for="nmColigacaoPorpocionalId">Nome Coligacação Porpocional</label>
-        </div>
-        <div class="input-field col s12 l6">
-          <input name="nmCandidatoMajoritario" id="nmCandidatoMajoritarioId" type="text" class="validate">
-          <label for="nmCandidatoMajoritarioId">Nome do Candidato à prefeitura</label>
-        </div>
-      </div>
 
-      <div class="row">
-    <form class="col s12">
-      <div class="row">
-      <div class="input-field col s12 l3">
-          <input name="numCandMajoritario" id="numCandMajoritarioId" type="text" class="validate">
-          <label for="numCandMajoritarioId">Numero Prefeito(a)</label>
-        </div>
-        <div class="input-field col s12 l6">
-          <input name="nmColigacaoMajoritaria" id="nmColigacaoMajoritariaId" type="text" class="validate">
-          <label for="nmColigacaoMajoritariaId">Coligação Prefeitura</label>
-        </div>
-        <div class="input-field col s12 l3">
-          <input name="CNPJMajoritario" id="CNPJMajoritarioId" type="text" class="validate">
-          <label for="CNPJMajoritarioId">CNPJ Campanha Prefeito(a)</label>
-        </div>
+        
       </div>
 
 
@@ -237,7 +225,7 @@ if(! $result){
       </div>
 
       <div class="center-align">
-<button name="cadastrarCandidato" type="submit" class="btn-large waves-effect waves-light ">Cadastrar Candidato
+<button name="cadastrarEleitor" type="submit" class="btn-large waves-effect waves-light ">Cadastrar Eleitor
     <i class="material-icons right">done_all</i>
   </button>
   </div> 

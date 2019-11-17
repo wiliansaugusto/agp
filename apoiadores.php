@@ -1,21 +1,21 @@
 <?php
 
-require_once('classes/candidato.class.php');
+include_once('classes/apoiador.class.php');
 
-
- if(isset($_POST['cadastrarCandidato'])){
-    $obj = new candidato();
+//var_dump($_POST);
+ if(isset($_POST['cadastrarApoiador'])){
+     $obj = new apoiador();
     foreach ($_POST as $key => $value) {
       $obj->$key=$value;
 
     }
 
 $result =    $obj->salvar($_POST);
-
+/*
 if(! $result){
   header("location: index.php"); 
 
-}
+}*/
 
  }
 
@@ -53,9 +53,9 @@ if(! $result){
 <?php include_once('navegacao.php')?>
 
 <div class="container m10">
-<h3 class="center-align">Cadastrar candidato</h3>
+<h3 class="center-align">Cadastrar Apoiadores</h3>
 
-<form action="candidatos.php" method="post">
+<form action="apoiadores.php" method="post">
     <input type="hidden" name="isAtivo" value="1">
 <div class="row">
     <form class="col s12 ">
@@ -177,59 +177,66 @@ if(! $result){
         </div>
       </div>
 
-<h5 class="center-align">Dados da candidatura</h5>
+
       <div class="row">
     <form class="col s12">
       <div class="row">
         <div class="input-field col s12 l6">
-          <input name="nmCandidato" id="nmCandidatoId" type="text" class="validate">
-          <label for="nmCandidatoId">Nome Fantasia</label>
+          <input name="nmIndicacao" id="nmIndicacaoId" type="text" class="validate">
+          <label for="nmIndicacaoId">Quem Indicou?</label>
         </div>
         <div class="input-field col s12 l6">
-          <input name="CNPJCampanha" id="CNPJCampanhaId" type="text" class="validate">
-          <label for="CNPJCampanhaId">CNPJ da Campanha</label>
-        </div>
-      
-      <div class="row">
-    <form class="col s12">
-      <div class="row">
-        <div class="input-field col s12 l6">
-          <input name="numCandidato" id="numCandidatoId" type="text" class="validate">
-          <label for="numCandidatoId">Numero do Candidato</label>
-        </div>
-        <div class="input-field col s12 l6">
-          <input name="siglaPartido" id="siglaPartidoId" type="text" class="validate">
-          <label for="siglaPartidoId">Sigla Partidaria</label>
+        <textarea name="obsIndicacao" id="obsIndicacaoId" class="materialize-textarea"></textarea>
+          <label for="obsIndicacaoId">Obs da Indicação</label>
         </div>
       </div>
       <div class="row">
     <form class="col s12">
       <div class="row">
         <div class="input-field col s12 l6">
-          <input name="nmColigacaoPorpocional" id="nmColigacaoPorpocionalId" type="text" class="validate">
-          <label for="nmColigacaoPorpocionalId">Nome Coligacação Porpocional</label>
+          <input name="dtInicioCamp" id="dtInicioCampId" type="text" class="datepicker">
+          <label for="dtInicioCampId">Inicio na Campanha</label>
         </div>
         <div class="input-field col s12 l6">
-          <input name="nmCandidatoMajoritario" id="nmCandidatoMajoritarioId" type="text" class="validate">
-          <label for="nmCandidatoMajoritarioId">Nome do Candidato à prefeitura</label>
+          <input name="dtTerminoCamp" id="dtTerminoCampId" type="text" class="datepicker">
+          <label for="dtTerminoCampId">Encerramento na Campanha</label>
+        </div>
+      </div>
+      <div class="row">
+    <form class="col s12">
+      <div class="row">
+        <div class="input-field col s12 l6">
+          <input name="valPag" id="valPagId" type="text" class="validate">
+          <label for="valPagId">Valor Combinado</label>
+        </div>
+        <div class="input-field col s12 l6">
+          <input placeholder="Salário, Ajuda de custo, Contrato..."name="referencia" id="referenciaId" type="text" class="validate">
+          <label for="referenciaId">Referencia do Pagamento</label>
         </div>
       </div>
 
       <div class="row">
     <form class="col s12">
       <div class="row">
-      <div class="input-field col s12 l3">
-          <input name="numCandMajoritario" id="numCandMajoritarioId" type="text" class="validate">
-          <label for="numCandMajoritarioId">Numero Prefeito(a)</label>
+      <div class="input-field col s12 l6">
+          <select name="isLideranca">
+      <option value="" disabled selected>Escolha uma opção</option>
+      <option value="Sim">Sim </option>
+      <option value="Nao">Não</option>
+    </select>
+    <label>Liderança de Segmento?</label>
         </div>
         <div class="input-field col s12 l6">
-          <input name="nmColigacaoMajoritaria" id="nmColigacaoMajoritariaId" type="text" class="validate">
-          <label for="nmColigacaoMajoritariaId">Coligação Prefeitura</label>
+        <textarea name="obsLiderenca" id="obsLiderencaoId" class="materialize-textarea"></textarea>
+          <label for="obsLiderencaId">Observaçao de Liderança</label>
         </div>
-        <div class="input-field col s12 l3">
-          <input name="CNPJMajoritario" id="CNPJMajoritarioId" type="text" class="validate">
-          <label for="CNPJMajoritarioId">CNPJ Campanha Prefeito(a)</label>
+       
+        <div class="input-field col s12 l12">
+          <input placeholder="Coordenador, lider de equipe, equipe de apoio" name="grauEnvolvimento" id="grauEnvolvimentoId" type="text" class="validate">
+          <label for="grauEnvolvimentoId">Comprometimento</label>
         </div>
+
+        
       </div>
 
 
@@ -237,7 +244,7 @@ if(! $result){
       </div>
 
       <div class="center-align">
-<button name="cadastrarCandidato" type="submit" class="btn-large waves-effect waves-light ">Cadastrar Candidato
+<button name="cadastrarApoiador" type="submit" class="btn-large waves-effect waves-light ">Cadastrar Apoiador
     <i class="material-icons right">done_all</i>
   </button>
   </div> 
